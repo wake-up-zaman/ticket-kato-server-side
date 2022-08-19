@@ -1,56 +1,56 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const app = express()
-const port = process.env.PORT || 5000;
+import express from "express"
+import dotenv from "dotenv"
+import mongoose from "mongoose"
+import busesRoute from "./routes/buses.js"
+import usersRoute from './routes/users.js'
+import reviewsRoute from "./routes/reviews.js"
+dotenv.config()
+const app=express()
+const port = process.env.PORT || 8800;
 
-app.use(cors());
-app.use(express.json());
-
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.pbddk.mongodb.net/?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
-async function run() {
+const connect = async () => {
   try {
-
-    await client.connect();
-    const reviewsCollection = client.db('Ticket-Kato').collection('reviews');
-    const BusCollection = client.db('Ticket-Kato').collection('BusInfo');
-
-    app.post('/reviews', async (req, res) => {
-      const reviews = req.body;
-      const result = await reviewsCollection.insertOne(reviews);
-      res.send(result);
-    })
-    app.get('/reviews', async (req, res) => {
-      const query = {};
-      const cursor = reviewsCollection.find(query);
-      const reviews = (await cursor.toArray()).reverse();
-      console.log(reviews)
-      res.send(reviews);
-    });
-    app.get('/busInfo',async(req,res)=>{
-      const query={}
-      const cursor=BusCollection.find(query);
-      const buses=await cursor.toArray()
-      res.send(buses);
-
-    })
-    //dfdfdfdfdf
-    //ggggggg
+    await mongoose.connect(process.env.MONGO);
+    console.log("Connected to mongoose ticket kato pro");
+  } catch (error) {
+    throw error;
   }
-  finally {
-  }
-}
-//dsdsdsd
-//lllll
-run().catch(console.dir);
+};
 
-app.get('/', (req, res) => {
-  res.send('Hello From Ticket Kato')
+mongoose.connection.on("disconnected",()=>{
+  console.log("mongoDB disconnected !")
 })
 
-app.listen(port, () => {
-  console.log(`Ticket Kato app listening on port ${port}`)
+mongoose.connection.on("connected",()=>{
+  console.log("mongoDB connected !")
 })
+
+//middleWires
+app.use(express.json())
+
+app.use("/buses",busesRoute);
+app.use("/users",usersRoute);
+app.use("/reviews",reviewsRoute);
+
+
+app.use((err,req,res,next)=>{
+  const errorStatus=err.status || 500
+  const errorMessage=err.message || "Something went wrong"
+  return res.status(errorStatus).json({
+    success:false,
+    status: errorStatus,
+    message:errorMessage,
+    stack:err.stack,
+  })
+})
+
+
+app.get("users",(req,res)=>{
+  res.send("hello from ticket kato pro")
+})
+
+
+app.listen(8800, () => {
+  connect();
+  console.log("Connected to backend 8800.");
+});
