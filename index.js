@@ -2,8 +2,11 @@ import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import busesRoute from "./routes/buses.js"
+import busesInfoRoute from "./routes/busesInfo.js"
 import usersRoute from './routes/users.js'
 import reviewsRoute from "./routes/reviews.js"
+import cors from "cors"
+
 dotenv.config()
 const app=express()
 const port = process.env.PORT || 8800;
@@ -26,9 +29,17 @@ mongoose.connection.on("connected",()=>{
 })
 
 //middleWires
+app.use(cors())
 app.use(express.json())
+const corsConfig = {
+  origin: true,
+  credentials: true,
+};
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
 
 app.use("/buses",busesRoute);
+app.use("/busesInfo",busesInfoRoute);
 app.use("/users",usersRoute);
 app.use("/reviews",reviewsRoute);
 
