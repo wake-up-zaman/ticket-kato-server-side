@@ -56,8 +56,8 @@ app.use((err,req,res,next)=>{
 })
 
 
-app.get("users",(req,res)=>{
-  res.send("hello from ticket kato pro")
+app.get("/",(req,res)=>{
+  res.send("Hello From Ticket-Kato Pro")
 })
 
 
