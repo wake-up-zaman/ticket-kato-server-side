@@ -7,7 +7,7 @@ import {
   updateSeats,
   updateSeatsAvailability,
   getSingleSeat,
-} from "../controllers/controller_Seats.js";
+} from "../controllers/controller_seats.js";
 
 
 const router = express.Router();
