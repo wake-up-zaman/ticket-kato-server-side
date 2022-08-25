@@ -11,6 +11,12 @@ const BusesSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    operator_names:{
+        type:[String],
+    },
+    bus_classes:{
+        type:[String]
+    },
     bus_type:{
         type:String,
         required:true
@@ -47,8 +53,7 @@ const BusesSchema=new mongoose.Schema({
         type:[String],
     },
     available_seats:{
-        type: Number,
-        required:true
+        type: [String],
     },
     boarding_point:{
         type:String,

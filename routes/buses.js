@@ -1,5 +1,5 @@
 import express from "express"
-import { createBuses, deleteBuses, getAllBuses, getBuses, updateBuses } from "../controllers/controller_buses.js";
+import { createBuses, deleteBuses, getAllBuses, getBuses, getBusesSeats, updateBuses } from "../controllers/controller_buses.js";
 const router=express.Router();
 
 //CREATE of buses
@@ -16,6 +16,8 @@ router.get("/:id",getBuses)
 
 //GET ALL
 router.get("/", getAllBuses)
+
+router.get("/seats/:id", getBusesSeats);
 
 
 export default router;

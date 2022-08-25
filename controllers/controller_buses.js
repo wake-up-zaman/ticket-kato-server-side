@@ -1,4 +1,5 @@
 import Buses from "../models/model_buses.js";
+import Seat from "../models/model_seats.js";
 
 export const createBuses=async (req,res,next)=>{
     const newBuses=new Buses(req.body)
@@ -59,3 +60,17 @@ export const getAllBuses=async (req,res,next)=>{
         next(err);
     }
 }
+
+export const getBusesSeats = async (req, res, next) => {
+    try {
+      const bus = await Buses.findById(req.params.id);
+      const list = await Promise.all(
+       bus.available_seats.map((seat) => {
+          return Seat.findById(seat);
+        })
+      );
+      res.status(200).json(list)
+    } catch (err) {
+      next(err);
+    }
+  };

@@ -1,15 +1,16 @@
 import mongoose from 'mongoose';
 
 const reviewsSchema=new mongoose.Schema({
-    email:{
-        type:String,
-        required:true
-    },
+
     name:{
         type:String,
         required:true 
     },
-    photos:{
+    email:{
+        type:String,
+        required:true
+    },
+    img:{
         type:String,
         required:true
     },

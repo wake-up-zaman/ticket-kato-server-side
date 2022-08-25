@@ -5,6 +5,7 @@ import busesRoute from "./routes/buses.js"
 import busesInfoRoute from "./routes/busesInfo.js"
 import usersRoute from './routes/users.js'
 import reviewsRoute from "./routes/reviews.js"
+import seatsRoute from './routes/seats.js'
 import cors from "cors"
 
 dotenv.config()
@@ -42,6 +43,7 @@ app.use("/buses",busesRoute);
 app.use("/busesInfo",busesInfoRoute);
 app.use("/users",usersRoute);
 app.use("/reviews",reviewsRoute);
+app.use("/seats", seatsRoute);
 
 
 app.use((err,req,res,next)=>{
