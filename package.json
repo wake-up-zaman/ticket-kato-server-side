@@ -20,6 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.8.0",
     "mongoose": "^6.5.2",
-    "render": "^0.1.4"
+    "render": "^0.1.4",
+    "stripe": "^10.6.0"
   }
 }

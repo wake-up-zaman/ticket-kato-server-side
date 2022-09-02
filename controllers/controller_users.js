@@ -13,7 +13,6 @@ export const createUsers=async (req,res,next)=>{
     }
 }
 
-
 export const updateUser=async (req,res,next)=>{
     try {
         const email = req.params.email
@@ -24,9 +23,6 @@ export const updateUser=async (req,res,next)=>{
             $set: user
         }
         const result = await User.updateOne(filter, updateDoc, options);
-        // const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' })
-        // res.send(result,token)
-
         res.send(result)
 
       } catch (err) {

@@ -2,10 +2,10 @@ import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import busesRoute from "./routes/buses.js"
-import busesInfoRoute from "./routes/busesInfo.js"
 import usersRoute from './routes/users.js'
 import reviewsRoute from "./routes/reviews.js"
 import seatsRoute from './routes/seats.js'
+import paymentRoute from './routes/payment.js'
 import cors from "cors"
 
 dotenv.config()
@@ -21,12 +21,12 @@ const connect = async () => {
   }
 };
 
-mongoose.connection.on("disconnected",()=>{
-  console.log("mongoDB disconnected !")
-})
-
 mongoose.connection.on("connected",()=>{
   console.log("mongoDB connected !")
+})
+
+mongoose.connection.on("disconnected",()=>{
+  console.log("mongoDB disconnected !")
 })
 
 //middleWires
@@ -36,15 +36,14 @@ const corsConfig = {
   origin: true,
   credentials: true,
 };
+
 app.use(cors(corsConfig));
 app.options("*", cors(corsConfig));
-
 app.use("/buses",busesRoute);
-app.use("/busesInfo",busesInfoRoute);
 app.use("/users",usersRoute);
 app.use("/reviews",reviewsRoute);
 app.use("/seats", seatsRoute);
-
+app.use("/create-payment-intent",paymentRoute);
 
 app.use((err,req,res,next)=>{
   const errorStatus=err.status || 500
