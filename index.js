@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import busesRoute from "./routes/buses.js"
+import bookingRoute from "./routes/booking.js"
 import usersRoute from './routes/users.js'
 import reviewsRoute from "./routes/reviews.js"
 import seatsRoute from './routes/seats.js'
@@ -40,6 +41,7 @@ const corsConfig = {
 app.use(cors(corsConfig));
 app.options("*", cors(corsConfig));
 app.use("/buses",busesRoute);
+app.use("/booking",bookingRoute);
 app.use("/users",usersRoute);
 app.use("/reviews",reviewsRoute);
 app.use("/seats", seatsRoute);
