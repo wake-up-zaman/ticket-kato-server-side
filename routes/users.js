@@ -1,6 +1,6 @@
-import express from "express"
-import { createUsers, deleteUser, getAdmin, getAllUser, getUser, RemoveAdmin, SetAdmin, updateUser } from "../controllers/controller_users.js";
-import { verifyToken } from "../utils/verifyToken.js";
+const express = require('express');
+const { createUsers, deleteUser, getAdmin, getAllUser, getUser, RemoveAdmin, SetAdmin, updateUser } =require("../controllers/controller_users.js");
+const { verifyToken }=require("../utils/verifyToken.js");
 const router=express.Router();
 
 //CREATE of buses
@@ -55,4 +55,4 @@ router.put("/removeAdmin/:email",RemoveAdmin)
 // router.put("/removeAdmin/:email", verifyToken, RemoveAdmin)
 
 
-export default router;
+module.exports=router;

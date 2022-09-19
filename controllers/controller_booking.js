@@ -1,7 +1,7 @@
-import Booking from "../models/model_booking.js";
+const Booking=require("../models/model_booking.js");
 
 
-export const createBooking=async (req,res,next)=>{
+ const createBooking=async (req,res,next)=>{
     const newBooking=new Booking(req.body)
 
     try{
@@ -13,7 +13,7 @@ export const createBooking=async (req,res,next)=>{
 } 
 
 
-export const updateBooking=async (req,res,next)=>{
+ const updateBooking=async (req,res,next)=>{
     try {
         const updatedBooking = await Booking.findByIdAndUpdate(
           req.params.id,
@@ -27,7 +27,7 @@ export const updateBooking=async (req,res,next)=>{
 }
 
 
-export const deleteBooking=async (req,res,next)=>{
+ const deleteBooking=async (req,res,next)=>{
     try {
         await Booking.findByIdAndDelete(req.params.id);
         res.status(200).json("Booking has been deleted.");
@@ -37,7 +37,7 @@ export const deleteBooking=async (req,res,next)=>{
 }
 
 
-export const getBooking=async (req,res,next)=>{
+ const getBooking=async (req,res,next)=>{
     const booking=req.query;
     try{
         const booked=await Booking.find(
@@ -51,7 +51,7 @@ export const getBooking=async (req,res,next)=>{
 }
 
 
-export const getAllBooking=async (req,res,next)=>{
+ const getAllBooking=async (req,res,next)=>{
     const booking=req.query;
     try{
         const newBooking=await Booking.find(booking);
@@ -61,3 +61,11 @@ export const getAllBooking=async (req,res,next)=>{
         next(err);
     }
 }
+
+module.exports =  {
+    createBooking,
+    updateBooking,
+    deleteBooking,
+    getBooking,
+    getAllBooking
+};

@@ -1,7 +1,7 @@
-import Buses from "../models/model_buses.js";
-import Seat from "../models/model_seats.js";
+ const Buses=require("../models/model_buses.js");
+ const Seat=require("../models/model_seats.js");
 
-export const createBuses=async (req,res,next)=>{
+const createBuses=async (req,res,next)=>{
     const newBuses=new Buses(req.body)
 
     try{
@@ -13,7 +13,7 @@ export const createBuses=async (req,res,next)=>{
 }
 
 
-export const updateBuses=async (req,res,next)=>{
+const updateBuses=async (req,res,next)=>{
     try {
         const updatedBuses = await Buses.findByIdAndUpdate(
           req.params.id,
@@ -27,7 +27,7 @@ export const updateBuses=async (req,res,next)=>{
 }
 
 
-export const deleteBuses=async (req,res,next)=>{
+const deleteBuses=async (req,res,next)=>{
     try {
         await Buses.findByIdAndDelete(req.params.id);
         res.status(200).json("Buses has been deleted.");
@@ -37,7 +37,7 @@ export const deleteBuses=async (req,res,next)=>{
 }
 
 
-export const getBuses=async (req,res,next)=>{
+const getBuses=async (req,res,next)=>{
     try{
         const buses=await Buses.findById(
             req.params.id
@@ -50,7 +50,7 @@ export const getBuses=async (req,res,next)=>{
 }
 
 
-export const getAllBuses=async (req,res,next)=>{
+const getAllBuses=async (req,res,next)=>{
     const bus=req.query;
     try{
         const buses=await Buses.find(bus);
@@ -61,7 +61,7 @@ export const getAllBuses=async (req,res,next)=>{
     }
 }
 
-export const getBusesSeats = async (req, res, next) => {
+const getBusesSeats = async (req, res, next) => {
     try {
       const bus = await Buses.findById(req.params.id);
       const list = await Promise.all(
@@ -74,3 +74,13 @@ export const getBusesSeats = async (req, res, next) => {
       next(err);
     }
   };
+
+  module.exports =  {
+    createBuses,
+    updateBuses,
+    deleteBuses,
+    getBuses,
+    getAllBuses,
+    getBusesSeats
+
+};

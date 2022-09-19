@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
@@ -21,6 +20,6 @@
     "mongodb": "^4.8.0",
     "mongoose": "^6.5.2",
     "render": "^0.1.4",
-    "stripe": "^10.6.0"
+    "stripe": "^10.8.0"
   }
 }

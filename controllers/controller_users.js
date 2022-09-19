@@ -1,8 +1,8 @@
-import jwt from "jsonwebtoken"
-import User from "../models/model_users.js"
+const jwt =require("jsonwebtoken");
+const User=require("../models/model_users.js");
 
 
-export const createUsers=async (req,res,next)=>{
+ const createUsers=async (req,res,next)=>{
     const newUsers=new User(req.body)
 
     try{
@@ -13,7 +13,7 @@ export const createUsers=async (req,res,next)=>{
     }
 }
 
-export const updateUser=async (req,res,next)=>{
+ const updateUser=async (req,res,next)=>{
     try {
         const email = req.params.email
         const user = req.body
@@ -31,7 +31,7 @@ export const updateUser=async (req,res,next)=>{
 }
 
 
-export const deleteUser=async (req,res,next)=>{
+ const deleteUser=async (req,res,next)=>{
     try {
         await User.findByIdAndDelete(req.params.id);
         res.status(200).json("User has been deleted.");
@@ -41,7 +41,7 @@ export const deleteUser=async (req,res,next)=>{
 }
 
 
-export const getUser=async (req,res,next)=>{
+ const getUser=async (req,res,next)=>{
     const email = req.params.email
     const query = { email: email }
     try{
@@ -55,7 +55,7 @@ export const getUser=async (req,res,next)=>{
 }
 
 
-export const getAllUser=async (req,res,next)=>{
+ const getAllUser=async (req,res,next)=>{
     try{
         const Users=await User.find();
         res.status(200).json(Users);
@@ -66,7 +66,7 @@ export const getAllUser=async (req,res,next)=>{
 }
 
 
-export const SetAdmin=async (req,res,next)=>{
+ const SetAdmin=async (req,res,next)=>{
 
     try{
         const email = req.params.email
@@ -82,7 +82,7 @@ export const SetAdmin=async (req,res,next)=>{
 }
 
 
-export const RemoveAdmin=async (req,res,next)=>{
+ const RemoveAdmin=async (req,res,next)=>{
 
     try{
         const email = req.params.email
@@ -98,7 +98,7 @@ export const RemoveAdmin=async (req,res,next)=>{
 }
 
 
-export const getAdmin=async (req,res,next)=>{
+ const getAdmin=async (req,res,next)=>{
 
     try{
         const email = req.params.email;
@@ -110,3 +110,15 @@ export const getAdmin=async (req,res,next)=>{
        next(err);
     }
 }
+
+module.exports =  {
+    createUsers,
+    updateUser,
+    deleteUser,
+    getUser,
+    getAllUser,
+    SetAdmin,
+    RemoveAdmin,
+    getAdmin
+  };
+

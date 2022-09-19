@@ -1,7 +1,7 @@
-import Reviews from "../models/model_reviews.js";
+const Reviews =require("../models/model_reviews.js");
 
 
-export const createReviews = async (req, res, next) => {
+ const createReviews = async (req, res, next) => {
     const newReview = new Reviews(req.body)
     console.log(newReview);
 
@@ -13,7 +13,7 @@ export const createReviews = async (req, res, next) => {
     }
 }
 
-export const getReviews = async (req, res, next) => {
+ const getReviews = async (req, res, next) => {
     try {
         const reviews = await Reviews.findById(
             req.params.id
@@ -26,7 +26,7 @@ export const getReviews = async (req, res, next) => {
 }
 
 
-export const getAllReviews = async (req, res, next) => {
+ const getAllReviews = async (req, res, next) => {
         // const query = {};
 
     try {
@@ -39,3 +39,8 @@ export const getAllReviews = async (req, res, next) => {
         next(err);
     }
 }
+module.exports =  {
+    createReviews,
+    getReviews,
+    getAllReviews
+};

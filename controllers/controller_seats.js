@@ -1,8 +1,8 @@
-import Seat from "../models/model_seats.js";
-import Buses from "../models/model_buses.js";
-import { createError } from "../utils/error.js";
+const Seat =require("../models/model_seats.js");
+const Buses=require("../models/model_buses.js");
+// import { createError } from "../utils/error.js";
 
-export const createSeats = async (req, res, next) => {
+ const createSeats = async (req, res, next) => {
   const busId = req.params.busID;
   const newSeat = new Seat(req.body);
 
@@ -21,7 +21,7 @@ export const createSeats = async (req, res, next) => {
   }
 };
 
-export const updateSeats = async (req, res, next) => {
+ const updateSeats = async (req, res, next) => {
   try {
     const updatedSeat = await Seat.findByIdAndUpdate(
       req.params.id,
@@ -33,7 +33,7 @@ export const updateSeats = async (req, res, next) => {
     next(err);
   }
 };
-export const updateSeatsAvailability = async (req, res, next) => {
+ const updateSeatsAvailability = async (req, res, next) => {
   try {
     await Seat.updateOne(
       { "seatNumbers._id": req.params.id },
@@ -48,7 +48,7 @@ export const updateSeatsAvailability = async (req, res, next) => {
     next(err);
   }
 };
-export const deleteSeats = async (req, res, next) => {
+ const deleteSeats = async (req, res, next) => {
   const busId = req.params.busId;
   try {
     await Seat.findByIdAndDelete(req.params.id);
@@ -64,7 +64,7 @@ export const deleteSeats = async (req, res, next) => {
     next(err);
   }
 };
-export const getSeats = async (req, res, next) => {
+ const getSeats = async (req, res, next) => {
   try {
     const seat = await Seat.findById(req.params.id);
     res.status(200).json(seat);
@@ -72,7 +72,7 @@ export const getSeats = async (req, res, next) => {
     next(err);
   }
 };
-export const getAllSeats = async (req, res, next) => {
+ const getAllSeats = async (req, res, next) => {
   try {
     const seats = await Seat.find();
     res.status(200).json(seats);
@@ -82,11 +82,21 @@ export const getAllSeats = async (req, res, next) => {
 };
 
 
-export const getSingleSeat = async (req, res, next) => {
+ const getSingleSeat = async (req, res, next) => {
   try {
     const seat = await Seat.findById(req.params.id);
     res.status(200).json(seat);
   } catch (err) {
     next(err);
   }
+};
+
+module.exports =  {
+  createSeats,
+  updateSeatsAvailability,
+  deleteSeats,
+  updateSeats,
+  getSeats,
+  getAllSeats,
+  getSingleSeat
 };

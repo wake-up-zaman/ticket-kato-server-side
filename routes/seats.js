@@ -1,5 +1,5 @@
-import express from "express";
-import {
+const express = require('express');
+const {
   createSeats,
   deleteSeats,
   getSeats,
@@ -7,7 +7,7 @@ import {
   updateSeats,
   updateSeatsAvailability,
   getSingleSeat,
-} from "../controllers/controller_seats.js";
+}=require("../controllers/controller_seats.js");
 
 
 const router = express.Router();
@@ -32,4 +32,4 @@ router.get("/", getAllSeats);
 
 router.get("/singleSeat/:id",getSingleSeat)
 
-export default router;
+module.exports=router;

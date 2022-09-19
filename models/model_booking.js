@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose=require('mongoose');
 
 const BookingSchema=new mongoose.Schema({
     travel_date:{
@@ -55,4 +55,4 @@ const BookingSchema=new mongoose.Schema({
     }
 });
 
-export default mongoose.model("Booking",BookingSchema)
+module.exports=mongoose.model("Booking",BookingSchema)

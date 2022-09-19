@@ -1,5 +1,5 @@
-import express from "express"
-import { createBooking, deleteBooking, getAllBooking, getBooking, updateBooking } from "../controllers/controller_booking.js";
+const express = require('express');
+const { createBooking, deleteBooking, getAllBooking, getBooking, updateBooking } =require("../controllers/controller_booking.js");
 
 const router=express.Router();
 
@@ -19,4 +19,4 @@ router.get("/:email",getBooking);
 router.get("/", getAllBooking);
 
 
-export default router;
+module.exports=router;

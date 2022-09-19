@@ -1,7 +1,7 @@
-import jwt from "jsonwebtoken";
-import { createError } from "../utils/error.js";
+const jwt=require("jsonwebtoken");
+const { createError }=require("../utils/error.js");
 
-export const verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization
     if (!authHeader) {
       return res.status(401).send({ message: 'unauthorized access' })
@@ -16,3 +16,6 @@ export const verifyToken = (req, res, next) => {
     });
   }
   
+  module.exports =  {
+    verifyToken
+  };
